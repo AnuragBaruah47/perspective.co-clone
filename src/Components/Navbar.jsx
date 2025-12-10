@@ -13,7 +13,7 @@ const Navbar = () => {
     "Careers",
   ];
   return (
-    <nav className="w-full flex justify-between items-center shadow-none p-4 ">
+    <nav className="w-full fixed bg-gray-300 z-100 flex justify-between items-center shadow-none p-4 ">
       <div>
         <li className="flex font-semibold tracking-tight text-[20px] items-center gap-4 text-(--blackshade)">
           <img src={logo} className="w-8 h-8" alt="home" />

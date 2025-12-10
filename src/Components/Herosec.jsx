@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 import { useGSAP } from "@gsap/react";
-import VideoAnimation from "./VideoAnimation";
 
 const Herosec = () => {
   const marqueeRef = useRef(null);
@@ -19,7 +18,7 @@ const Herosec = () => {
 
     gsap.to(rotateRef.current, {
       rotationZ: 360,
-      duration: 15,
+      duration: 5,
       repeat: -1,
     });
 
@@ -36,14 +35,14 @@ const Herosec = () => {
     gsap.to(marqueeRef.current, {
       x: halfOfWidth,
       repeat: -1,
-      duration: 5,
+      duration: 15,
       ease: "linear",
     });
   });
 
   const array = [0, 1, 2, 3, 4];
   return (
-    <div className="w-full oveeflow-x-hidden flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
       <div className="w-full flex justify-center">
         <h1 className="text-center text-7xl tracking-wide leading-22 w-5xl font-bold">
           Double Your Business with Perspective Funnels™
@@ -208,7 +207,10 @@ const Herosec = () => {
       </div>
 
       <div className="flex justify-center perspective-distant transform-3d">
-        <div ref={videoRef} className="relative w-[57%] rotate-x-30 rounded-2xl overflow-hidden  p-1">
+        <div
+          ref={videoRef}
+          className="relative w-[57%] rotate-x-30 rounded-2xl overflow-hidden  p-1"
+        >
           {/* 2. GRADIENT SPINNER: The layer we animate with GSAP */}
           <div
             ref={rotateRef}
@@ -245,6 +247,51 @@ const Herosec = () => {
           </div>
         </div>
       </div>
+
+      <div className="w-full flex mt-28  justify-center">
+        <div className="w-5xl flex border border-gray-300 gap-40 rad py-14 px-14 rounded-4xl justify-center">
+          <div className="flex rounded-3xl">
+            <div className="flex flex-col gap-4 items-center justify-center">
+              <h1 className="text-3xl font-bold leading-10  w-70 text-center">
+                Perspective Review 2025 Is Live ✨
+              </h1>
+              <p className="w-90 text-center">
+                Learn about 29 new features that boost your conversion rates.
+              </p>
+              <Button
+                svg={
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM11.7071 7.29289L8.70711 4.29289C8.31658 3.90237 7.68342 3.90237 7.29289 4.29289C6.90237 4.68342 6.90237 5.31658 7.29289 5.70711L8.58579 7L5 7C4.44772 7 4 7.44771 4 8C4 8.55228 4.44772 9 5 9H8.58579L7.29289 10.2929C6.90237 10.6834 6.90237 11.3166 7.29289 11.7071C7.68342 12.0976 8.31658 12.0976 8.70711 11.7071L11.7071 8.70711C12.0976 8.31658 12.0976 7.68342 11.7071 7.29289Z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                }
+                children="Watch Perspective Review"
+                className="bg-[#F9F9F9] hover:bg-[#F1F1F1] font-semibold text-[18px] cursor-pointer py-3.5 px-7 shadow-none text-(--second-button-normal-state) flex gap-4"
+              />
+            </div>
+          </div>
+
+          <div className="">
+            <img
+              className="w-94 hover:scale-[102%] hover:cursor-pointer transition-all ease-in-out duration-700"
+              src="https://cdn.prod.website-files.com/61ba09162b87002e87715b91/691dc5e64d5c7deb10fd55e5_734a7c4435b5c3c78d4883a19e165ff3_promo.avif"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+
     </div>
   );
 };
