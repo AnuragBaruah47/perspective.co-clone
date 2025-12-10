@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { logo } from "../assets/assets";
 import Button from "./Button";
 import Badge from "./Badge";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger)
 
 const Navbar = () => {
+  const navRef=useRef(null)
+  useGSAP(()=>{
+    
+  })
   const navItems = [
     "Product",
     "Templates",
@@ -13,7 +21,7 @@ const Navbar = () => {
     "Careers",
   ];
   return (
-    <nav className="w-full fixed bg-gray-300 z-100 flex justify-between items-center shadow-none p-4 ">
+    <nav ref={navRef} className="w-full fixed z-100 flex justify-between items-center shadow-none p-4 ">
       <div>
         <li className="flex font-semibold tracking-tight text-[20px] items-center gap-4 text-(--blackshade)">
           <img src={logo} className="w-8 h-8" alt="home" />
