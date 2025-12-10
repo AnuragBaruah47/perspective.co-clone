@@ -5,16 +5,24 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 import { useGSAP } from "@gsap/react";
+import VideoAnimation from "./VideoAnimation";
 
 const Herosec = () => {
-  const videoRef = useRef(null);
   const marqueeRef = useRef(null);
-  const newImages=[...marqueeImages,...marqueeImages]
+  const newImages = [...marqueeImages, ...marqueeImages];
+  const videoRef = useRef(null);
+  const rotateRef = useRef(null);
 
   useGSAP(() => {
     const width = window.getComputedStyle(marqueeRef.current).width;
     const halfOfWidth = -1 * (parseInt(width) / 2);
-    
+
+    gsap.to(rotateRef.current, {
+      rotationZ: 360,
+      duration: 15,
+      repeat: -1,
+    });
+
     gsap.to(videoRef.current, {
       rotateX: 0,
       scrollTrigger: {
@@ -25,17 +33,17 @@ const Herosec = () => {
       },
     });
 
-    gsap.to(marqueeRef.current,{
-      x:halfOfWidth,
-      repeat:-1,
-      duration:15,
-      ease:"linear"
-    })
+    gsap.to(marqueeRef.current, {
+      x: halfOfWidth,
+      repeat: -1,
+      duration: 5,
+      ease: "linear",
+    });
   });
 
   const array = [0, 1, 2, 3, 4];
   return (
-    <div className="w-full flex flex-col gap-6">
+    <div className="w-full oveeflow-x-hidden flex flex-col gap-6">
       <div className="w-full flex justify-center">
         <h1 className="text-center text-7xl tracking-wide leading-22 w-5xl font-bold">
           Double Your Business with Perspective Funnels™
@@ -199,15 +207,25 @@ const Herosec = () => {
         </div>
       </div>
 
-      <div className="w-full flex justify-center">
-        <div className="flex justify-center perspective-distant transform-3d rounded-2xl">
+      <div className="flex justify-center perspective-distant transform-3d">
+        <div ref={videoRef} className="relative w-[57%] rotate-x-30 rounded-2xl overflow-hidden  p-1">
+          {/* 2. GRADIENT SPINNER: The layer we animate with GSAP */}
+          <div
+            ref={rotateRef}
+            className="absolute rounded-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%]"
+            style={{
+              // We use a Conic Gradient for the best 'circular' moving effect
+              background: `conic-gradient(from 0deg, #8BDAF2, #C7CDF7, #F6CB99, #8BDAF2, #C7CDF7, #F6CB99, #F6D09A, #F6BF97, #DA8BDB, #8BDAF2)`,
+            }}
+          />
+
+          {/* 3. VIDEO: Sits on top (z-10) to mask the center */}
           <video
-            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
-            className="rotate-x-30 w-[56%]  bg-red-400 p-1  rounded-2xl"
+            className="relative z-10 w-full h-full rounded-[14px] bg-black object-cover"
             src="https://player.vimeo.com/progressive_redirect/playback/1064689144/rendition/1080p/file.mp4?loc=external&log_user=0&signature=9769e12e649f9faf25294a7405057fbe410fb0ab4ab24a6575ad652b3b11ff57&user_id=101816034"
           ></video>
         </div>
@@ -217,14 +235,13 @@ const Herosec = () => {
         <div className="flex justify-center font-semibold text-2xl">
           Used daily by more than 6,000 small and large businesses.
         </div>
-        <div className="flex w-full justify-center">
+        <div className="flex  w-full justify-center">
           <div className="flex w-7xl mask-x-from-70% mask-x-to-90% overflow-clip">
             <div ref={marqueeRef} className="flex shrink-0">
-            {newImages.map((src, idx) => {
-              return <img className="w-40" src={src} key={idx} alt="home" />;
-            })}
+              {newImages.map((src, idx) => {
+                return <img className="w-40" src={src} key={idx} alt="home" />;
+              })}
             </div>
-
           </div>
         </div>
       </div>
